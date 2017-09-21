@@ -8,7 +8,10 @@
             <sliderbar></sliderbar>
           </div>
           <div class="col-md-9">
-            <router-view></router-view>
+            <transition enter-active-class="animated bounceIn" leave-active-class="animated bounceOut" mode="out-in">
+              <router-view class="position"></router-view>
+            </transition>
+
           </div>
         </div>
       </div>
@@ -34,4 +37,8 @@ export default {
 </script>
 
 <style>
+  .position{
+    position: absolute;
+    width: 100%;
+  }
 </style>

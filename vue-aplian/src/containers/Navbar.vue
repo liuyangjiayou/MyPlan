@@ -6,7 +6,7 @@
         <div class="navbar-header">
           <a class="navbar-brand">
             <i class="glyphicon glyphicon-time"></i>
-            刘杨计划
+            我的计划
           </a>
         </div>
         <ul class="navbar-nav nav">

@@ -1,4 +1,3 @@
-
 <template>
     <div>
       <router-link to="/time/time-add" class="btn btn-primary">创建</router-link>
@@ -10,6 +9,9 @@
           <div class="row">
             <div class="col-md-2">
               <img :src="list.avatar" class="img-circle img-responsive">
+              <div class="text-center">
+                {{list.name}}
+              </div>
             </div>
             <div class="col-md-1">
               <div class="row">
@@ -21,32 +23,40 @@
               <div>{{list.comment}}</div>
             </div>
             <div class="col-md-1">
-              <button class="btn btn-danger">
+              <button @click="remove(list)" class="btn btn-danger">
                 删除
               </button>
             </div>
           </div>
         </li>
       </ul>
+      <div v-show="!isShow" class="text-warning h3">
+        亲！ 添加计划吧，您的计划已经空空乳液
+      </div>
     </div>
 </template>
 <script>
+  import * as types from '../store/types'
+  import {mapState,mapActions,mapGetters} from 'vuex'
     export default {
         data(){
-            return {
-                lists : [
-                  {
-                    avatar : 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=958555937,293602035&fm=27&gp=0.jpg',
-                    name : 'LY',
-                    date : '2017年',
-                    time : '2',
-                    comment : '今天回家早点吃饭'
-                  }
-                ]
-            }
+            return {}
         },
         components: {},
-        methods: {}
+        computed : {
+          ...mapState(['lists']),
+          ...mapGetters(['isShow'])
+        },
+        methods: {
+          ...mapActions([
+              types.DECRMENT_TOTALTIME,
+              types.REMOVE_PLAN
+          ]),
+            remove(list){//表示当前传进来的那一项
+                this[types.REMOVE_PLAN](list);
+                this[types.DECRMENT_TOTALTIME](list.time)
+            }
+        }
     }
 </script>
 <style scoped>
